@@ -69,6 +69,7 @@ string hexToBin(string hex) {
 
 
 QInt binToDec(string bin) {
+	if (bin.length() > 128) return { 0, 0, 0, 0 };
 	QInt result;
 
 	int dem = 0;
@@ -86,6 +87,7 @@ QInt binToDec(string bin) {
 }
 
 QInt hexToDec(string hex) {
+	if (hex.length() > 128 / 4) return { 0, 0, 0, 0 };
 	string bin = hexToBin(hex);
 	return binToDec(bin);
 }

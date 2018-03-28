@@ -250,6 +250,15 @@ QInt mult2QInt(QInt Q, QInt M) {
 			return { 0, 0, 0, 0 };//return 0;
 		}
 	}
+
+	if ((getBitAt(Q.data[3], 31) == 1 && getBitAt(M.data[3], 31) == 1 && getBitAt(A.data[3], 31) == 1)
+		|| (getBitAt(Q.data[3], 31) == 0 && getBitAt(M.data[3], 31) == 1 && getBitAt(A.data[3], 31) == 0)
+		|| (getBitAt(Q.data[3], 31) == 0 && getBitAt(M.data[3], 31) == 0 && getBitAt(A.data[3], 31) == 1)
+		|| (getBitAt(Q.data[3], 31) == 1 && getBitAt(M.data[3], 31) == 0 && getBitAt(A.data[3], 31) == 0))
+	{
+		//tran so return 0
+		return { 0, 0, 0, 0 };
+	}
 	return Q;
 }
 

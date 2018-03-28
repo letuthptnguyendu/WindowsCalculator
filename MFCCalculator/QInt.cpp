@@ -8,9 +8,10 @@ void scanQInt(string number, QInt &qInt) {
 	qInt = { 0, 0, 0, 0 };
 	bool isPositive = true;
 
-	//count bit
-	int count = countBit_unsInt(number);
-	if (count > 128) { return; }
+	//--
+	while (number.length() > 1 && number[0]=='-' && number[1]=='-') {
+		number = number.substr(2, number.length() - 2);
+	}
 
 	//get sign
 	if (!isdigit(number[0])) {
@@ -19,6 +20,10 @@ void scanQInt(string number, QInt &qInt) {
 		number = number.substr(1, number.length() - 1);
 	}
 	else { isPositive = true; }
+
+	//count bit
+	int count = countBit_unsInt(number);
+	if (count > 128) { return; }
 
 	//set bit
 	int i = 0;
@@ -251,10 +256,10 @@ QInt mult2QInt(QInt Q, QInt M) {
 		}
 	}
 
-	if ((getBitAt(Q.data[3], 31) == 1 && getBitAt(M.data[3], 31) == 1 && getBitAt(A.data[3], 31) == 1)
-		|| (getBitAt(Q.data[3], 31) == 0 && getBitAt(M.data[3], 31) == 1 && getBitAt(A.data[3], 31) == 0)
-		|| (getBitAt(Q.data[3], 31) == 0 && getBitAt(M.data[3], 31) == 0 && getBitAt(A.data[3], 31) == 1)
-		|| (getBitAt(Q.data[3], 31) == 1 && getBitAt(M.data[3], 31) == 0 && getBitAt(A.data[3], 31) == 0))
+	if ((getBitAt(st_.data[3], 31) == 1 && getBitAt(M.data[3], 31) == 1 && getBitAt(Q.data[3], 31) == 1)
+		|| (getBitAt(st_.data[3], 31) == 0 && getBitAt(M.data[3], 31) == 1 && getBitAt(Q.data[3], 31) == 0)
+		|| (getBitAt(st_.data[3], 31) == 0 && getBitAt(M.data[3], 31) == 0 && getBitAt(Q.data[3], 31) == 1)
+		|| (getBitAt(st_.data[3], 31) == 1 && getBitAt(M.data[3], 31) == 0 && getBitAt(Q.data[3], 31) == 0))
 	{
 		//tran so return 0
 		return { 0, 0, 0, 0 };
